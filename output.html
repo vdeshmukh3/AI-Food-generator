@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Indian Dish Recommender Results</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+
+  /* Set the background image and font */
+  body {
+    background-color: #f9f9f9;
+    font-family: 'Open Sans', sans-serif;
+    background-image: url('https://cdn.dribbble.com/users/107457/screenshots/1698920/vegetable_pattern_green.jpg');
+  }
+  
+  /* Style the main container */
+  .container {
+    background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9));
+    background-size: cover;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+    margin-top: 50px;
+    padding: 50px;
+    color: #333;
+  }
+
+  /* Style the heading */
+  .container h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+
+  /* Style the paragraph text */
+  .container p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin-bottom: 30px;
+  }
+
+  /* Style the buttons */
+  .container button {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #0f680f;
+    color: #FFF;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* Style the button on hover */
+  .container button:hover {
+    background-color: #0f680f;
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+  }
+
+  /* Adjust the container padding for smaller screens */
+  @media (max-width: 768px) {
+    .container {
+      padding: 30px;
+    }
+  }
+
+  /* Define the pulse animation */
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+
+  /* Style the heading in the card */
+  .my-5 {
+    font-family: 'Dancing Script', cursive;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    color: #0f680f;
+  }
+
+ /* Style the cards */
+.card {
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+  background-color: #bfdfbf;
+  margin-bottom: 30px;
+  border-radius: 20px;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Animate the card on hover */
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+}
+
+/* Style the card image */
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #000;
+}
+
+.card-text {
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.card-link {
+  color: #FFF;
+  font-weight: bold;
+  text-decoration: none;
+  background-color: #0f680f;
+  border-radius: 10px;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+}
+
+.card-link:hover {
+  background-color: #0f680f;
+  transform: translateY(-10px);
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+   50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+ 
+
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <h1 class="my-5">INDIAN DISH RECOMMENDER RESULTS</h1>
+        {% for i, dish in dishes.iterrows() %}
+        <div class="row">
+            <div class="col-md-4">
+                <img src="{{ dish['image'] }}" alt="{{ dish['TranslatedRecipeName'] }}" style="width:100%">
+            </div>
+            <div class="col-md-8">
+                <h2>Dish {{ i+1 }}: {{ dish['TranslatedRecipeName'] }}</h2>
+                <p><strong>Cuisine:</strong> {{ dish['Cuisine'] }}</p>
+                <p><strong>Preparation time:</strong> {{ dish['TotalTimeInMins'] }} mins</p>
+                <p><strong>Ingredients:</strong></p>
+                <ul>
+                    {% for ingredient in dish['Cleaned-Ingredients'].split(';') %}
+                        <li>{{ ingredient }}</li>
+                    {% endfor %}
+                </ul>
+                <p><strong>Instructions:</strong></p>
+                <ul>
+                    {% for instruction in dish['TranslatedInstructions'].split('\n') %}
+                        {% if instruction %}
+                            <li>{{ instruction }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+
+
+  <div class="modal fade" id="recipeModal" tabindex="-1" role="dialog" aria-labelledby="recipeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #0f680f;">
+          <h4 class="modal-title" id="recipeModalLabel" style="color: #fff;">Delicious Recipe</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" style="color: #fff;">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="background-color: #f5f5f5;">
+          <h5 style="color: #0f680f;">Instructions:</h5>
+          <div id="recipeInstructions"></div>
+        </div>
+        <div class="modal-footer" style="background-color: #f5f5f5;">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" style="color: #fffefe;">Close</button>
+
+          
+
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  </html>
+
+
+

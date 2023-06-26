@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Indian Dish Recommender</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+      
+      body {
+        padding: 50px;
+        font-family: Arial, sans-serif;
+        color: #ffffff;
+      } 
+      h1 {
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 30px;
+        
+      }
+
+      .background {
+      background-image: url('https://img5.goodfon.com/wallpaper/nbig/8/70/iabloki-sparzha-ogurtsy-kivi-ovoshchi-frukty-zelenye-temnyi.jpg');
+      background-size: cover;
+      background-position: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+}
+
+      form {
+        max-width: 500px;
+        margin: 0 auto;
+      }
+      label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 10px;
+      }
+      input[type="text"] {
+        border-radius: 0;
+        border-color: #ccc;
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        margin-bottom: 20px;
+        border-radius: 20px;
+        color: #000000;
+      }
+      input[type="submit"] {
+        background-color: #0f680f;
+        color: #fff;
+        border: none;
+        border-radius: 0;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        border-radius: 20px;
+
+      }
+      input[type="submit"]:hover {
+        background-color: #a5c9a5;
+        border: 2px solid #a5c9a5;
+      }
+
+      input[type="submit"]:hover {
+    background-color: #a5c9a5;
+    border-color: #a5c9a5;
+    color: #a5c9a5;
+}
+
+      p {
+        font-size: 18px;
+        text-align: center;
+        margin-top: 30px;
+      }
+
+      .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        animation: fire 2s ease-in-out infinite;
+      }
+
+      .content {
+        background-size: cover;
+        background-position: center;
+        height: 400px;
+        margin-top: 50px;
+        border-radius: 20px;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.952);
+      }
+
+      form {
+        max-width: 500px;
+        margin: 0 auto;
+        border-radius: 20px;
+        box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+        padding: 20px;
+        background-color: #424141;
+      }
+
+      input[type="text"]:hover {
+        border-color: #000000;
+        box-shadow: 0 0 5px #000000;
+      }
+
+      /**/
+
+
+      html, body {
+      width: 100%;
+      height:100%;
+    }
+
+    
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hidden {
+    font-size: 48px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    color: #6112f3;
+    text-shadow: 2px 2px #333;
+}
+
+
+      
+
+      
+
+    </style>
+  </head>
+  <body>
+    <h1 >INDIAN DISH RECOMMENDER </h1>
+    <div class="background"></div>
+
+    </div>
+    {% if message %}
+      <p>{{ message }}</p>
+    {% endif %}
+    <form action="{{ url_for('predict') }}" method="POST">
+      <label for="dish_type">Type of Dish:</label>
+  
+      <input type="text" id="dish_type" name="cuisine_type" required>
+      <label for="prep_time">Preferred Preparation Time:</label>
+      <input type="text" id="prep_time" name="recipe_time" required>
+      <input type="submit" value="Submit">
+    </form>
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
